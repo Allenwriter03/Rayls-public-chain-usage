@@ -33,7 +33,7 @@ SEL = {
 }
 
 load = lambda f: json.load(open(f))
-day = lambda x: dt.datetime.fromtimestamp(int(x["timeStamp"]), dt.UTC).date()
+day = lambda x: dt.datetime.fromtimestamp(int(x["timeStamp"]), dt.timezone.utc).date()
 inwin = lambda x: LO <= day(x) <= HI
 
 # 1. Chain totals
@@ -91,7 +91,7 @@ word = lambda b, o: int.from_bytes(b[o:o + 32], "big")
 RECEIVERS = {
     "0x674843c06ff83502ddb4d37c2e09c01cda38cbc8": "CreditMessaging (Stargate credit sync, protocol)",
     "0x3147be1cd913fe9ea5df7505ffe704a8313b20b0": "RLS OFT bridge (FeeAggregator.oftBridge)",
-    "0x015fd589f4f1a33ce4487e12714e1b15129c9329": "Stargate-format token messages",
+    "0x015fd589f4f1a33ce4487e12714e1b15129c9329": "TokenMessaging (Stargate token transfers)",
     "0xe56ddf65e311cddb71f69c0ac4d27e58b239d69a": "BRL1.p bridge (holds BRL1.p MINTER_ROLE)",
 }
 EID = {30101: "Ethereum", 30102: "BNB Chain", 30109: "Polygon", 30110: "Arbitrum", 30111: "Optimism",
