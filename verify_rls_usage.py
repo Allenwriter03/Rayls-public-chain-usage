@@ -149,8 +149,11 @@ print(f"   everyone else: {rest:,} in 31 days = {rest/31:.0f} a day")
 print(f"   window in blocks (first and last oracle call): {min(bn):,} to {max(bn):,}")
 print(f"   blocks in window: about {max(bn)-min(bn):,}; blocks holding a transaction: at most {win_total/(max(bn)-min(bn))*100:.1f}%")
 before = int(stats["total_transactions"]) - win_total
-print(f"   30-day growth: {win_total:,} new on {before:,} = {win_total/before*100:.1f}%; without the oracle: {(win_total-len(own))/before*100:.1f}%")
-
+print(f"   30-day growth: {win_total:,} new on {before:,} = {win_total/before*100:.1f}%")
+print(f"      of which the oracle: {len(own)/before*100:.1f} points; everything else: {(win_total-len(own))/before*100:.1f} points")
+non_now = int(stats["total_transactions"]) - o          # all-time non-oracle transactions
+non_before = non_now - (win_total - len(own))
+print(f"      non-oracle activity on its own: {non_before:,} -> {non_now:,} = {(non_now/non_before-1)*100:.1f}% growth")
 # 5. My own transaction
 t = load("my-tx.json")
 b = load("my-block.json")["items"]
